@@ -1,0 +1,11 @@
+#+TITLE:	Books
+#+AUTHOR:	Daniel Lyons
+#+EMAIL:	fusion@storytotell.org
+#+DATE:		2015-11-09
+#+STARTUP:	content
+
+* books
+
+This is my attempt to build a books / book-lending system. I happen to
+be using Lisp. I don't have much to say about it yet. Please have a look
+at the file =books.lisp= for more information.
