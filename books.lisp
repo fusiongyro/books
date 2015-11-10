@@ -108,3 +108,59 @@
 		      :where (:= 'isbn (book-isbn book))))))
 
 (return-book (get-dao 'book "978-1-61729-065-7"))
+
+
+;; Some ISBN related foo
+(ql:quickload "iterate")
+
+(use-package :iterate)
+
+(defun isbn10-digit (char idx)
+  "Convert an ISBN-10 digit to a number value."
+  (if (and (= 9 idx) (equal #\X char))
+      10
+      (digit-char-p char)))
+
+(defun isbn-10-valid? (isbn)
+  "t iff the supplied ISBN-10 is valid."
+  (and
+   (eq (length isbn) 10)
+   (zerop (mod (iter (for var in-string isbn)
+		     (for i index-of-string isbn)
+		     (sum (* (isbn10-digit var i) (1+ i))))
+	       11))))
+
+(defun isbn-13-valid? (isbn)
+  "t iff the supplied ISBN-13 is valid"
+  (and
+   (eq (length isbn) 13)
+   (zerop (mod (iter (for var in-string isbn)
+		     (for i index-of-string isbn)
+		     (sum (* (digit-char-p var) (1+ (* 2 (mod i 2))))))
+	       10))))
+
+(defun isbn-valid? (isbn)
+  (let ((reduced (remove-if-not #'digit-char-p isbn)))
+    (or (and (eq 10 (length reduced)) (isbn-10-valid? reduced))
+	(and (eq 13 (length reduced)) (isbn-13-valid? reduced)))))
+
+(defclass isbn ()
+  ((value :accessor isbn-value :initarg :value)))
+
+(defun make-isbn (value)
+  (if (isbn-valid? value)
+      (make-instance 'isbn :value value)
+      (error (format nil "Unable to parse ISBN: ~s" value))))
+
+(defmethod print-object ((isbn isbn) stream)
+  (format stream "#i~s" (isbn-value isbn)))
+
+(defun read-isbn (stream char args)
+  (declare (ignore char args))
+  (let ((isbn-chars (loop for x = (peek-char nil stream)
+		       while (isbn-char x)
+		       collect (read-char stream))))
+    (make-isbn (coerce isbn-chars 'string))))
+
+(set-dispatch-macro-character #\# #\i #'read-isbn)
+
