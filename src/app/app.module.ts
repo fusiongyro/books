@@ -5,6 +5,7 @@ import { AppComponent } from './app.component';
 import { BookListComponent } from './book-list/book-list.component';
 import {HttpClientModule} from "@angular/common/http";
 import {MatTableModule} from "@angular/material";
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 
 @NgModule({
   declarations: [
@@ -13,6 +14,7 @@ import {MatTableModule} from "@angular/material";
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     HttpClientModule,
     MatTableModule
   ],
