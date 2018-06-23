@@ -1,1 +1,5 @@
-.mat-list-item { float: right; }
+/* .mat-list-item { float: right; } */
+mat-nav-list {
+  display: flex;
+  flex-direction: row;
+}
