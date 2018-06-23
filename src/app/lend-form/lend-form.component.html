@@ -1,11 +1,11 @@
-<form>
+<form #lendForm="ngForm" (ngSubmit)="onSubmit()">
   <mat-form-field>
-    <input matInput required placeholder="ISBN" type="isbn"/>
+    <input matInput required placeholder="ISBN" name="isbn" [(ngModel)]="isbn"/>
   </mat-form-field>
 
   <mat-form-field>
-    <input matInput required placeholder="Borrower's Email Address" type="email"/>
+    <input matInput required placeholder="Borrower's Email Address" name="email" [(ngModel)]="email"/>
   </mat-form-field>
 
-  <button mat-raised-button class="mat-primary" (click)="submit()" type="submit">Lend</button>
+  <button mat-raised-button class="mat-primary" [disabled]="!lendForm.valid" type="submit">Lend</button>
 </form>

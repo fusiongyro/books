@@ -6,6 +6,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./lend-form.component.css']
 })
 export class LendFormComponent implements OnInit {
+  public isbn: string;
+  public email: string;
 
   constructor() { }
 
