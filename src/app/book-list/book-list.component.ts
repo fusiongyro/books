@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
 import {Book} from "../book";
+import DB from "../lib/dao";
 
 @Component({
   selector: 'book-list',
@@ -11,9 +12,9 @@ export class BookListComponent implements OnInit {
   books: Array<Book>;
   columnsToDisplay = ['isbn', 'title', 'author'];
 
-  constructor(private http: HttpClient) { }
+  constructor(private db: DB) { }
 
   ngOnInit() {
-    this.http.get<Array<Book>>('/api/books').subscribe(data => this.books = data);
+    this.db.allBooks().subscribe(data => this.books = data);
   }
 }
