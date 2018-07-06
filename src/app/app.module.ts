@@ -13,9 +13,10 @@ import {
   MatToolbarModule
 } from "@angular/material";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
-import { AppRoutingModule } from './/app-routing.module';
+import { AppRoutingModule } from './app-routing.module';
 import { LendFormComponent } from './lend-form/lend-form.component';
 import {FormsModule} from "@angular/forms";
+import {ModelModule} from "./model/model.module";
 
 @NgModule({
   declarations: [
@@ -29,7 +30,7 @@ import {FormsModule} from "@angular/forms";
     FormsModule,
     HttpClientModule,
     MatTableModule, MatToolbarModule, MatListModule, MatInputModule, MatButtonModule,
-    AppRoutingModule
+    AppRoutingModule, ModelModule
   ],
   providers: [],
   bootstrap: [AppComponent]

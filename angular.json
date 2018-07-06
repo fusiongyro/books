@@ -128,6 +128,46 @@
           }
         }
       }
+    },
+    "model": {
+      "root": "projects/model",
+      "sourceRoot": "projects/model/src",
+      "projectType": "library",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/model/tsconfig.lib.json",
+            "project": "projects/model/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "project": "projects/model/ng-package.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/model/src/test.ts",
+            "tsConfig": "projects/model/tsconfig.spec.json",
+            "karmaConfig": "projects/model/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/model/tsconfig.lib.json",
+              "projects/model/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
     }
   },
   "defaultProject": "books"

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
-import {Book} from "../book";
-import DB from "../lib/dao";
+import {DBService} from "../db.service";
+import {Book} from "../model/model.module";
 
 @Component({
   selector: 'book-list',
@@ -12,7 +12,7 @@ export class BookListComponent implements OnInit {
   books: Array<Book>;
   columnsToDisplay = ['isbn', 'title', 'author'];
 
-  constructor(private db: DB) { }
+  constructor(private db: DBService) { }
 
   ngOnInit() {
     this.db.allBooks().subscribe(data => this.books = data);

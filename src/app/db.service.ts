@@ -1,11 +1,14 @@
-import {Book, Lend} from "./model";
-import {HttpClient} from "@angular/common/http";
-import {Injectable} from "@angular/core";
-import {map} from "rxjs/operators";
+import { Injectable } from '@angular/core';
 import {Observable} from "rxjs/internal/Observable";
+import {map} from "rxjs/operators";
+import {HttpClient} from "@angular/common/http";
+import {Book, Lend} from "./model/model.module";
 
-@Injectable({providedIn: 'root'})
-class DB {
+@Injectable({
+  providedIn: 'root'
+})
+export class DBService {
+
   constructor(private http: HttpClient) { }
 
   allLends(): Observable<Lend[]> {
@@ -18,6 +21,5 @@ class DB {
     return this.http.get<Book[]>('/api/books')
       .pipe(map(books => books.map(book => Object.assign(new Book(), book))));
   }
-}
 
-export default DB;
+}
